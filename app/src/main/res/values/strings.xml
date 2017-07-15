@@ -23,4 +23,8 @@
     <string name="go">GO</string>
     <string name="permission_denied">Permission denied</string>
     <string name="imageview_description">The imageview that contains the emojified picture</string>
+    <string name="no_faces_message">No Faces Detected</string>
+    <string name="smile_probability">Smiling probability : </string>
+    <string name="left_eye_probability">Left eye probability : </string>
+    <string name="right_eye_probability">Right eye probability : </string>
 </resources>
