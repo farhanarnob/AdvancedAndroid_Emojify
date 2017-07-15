@@ -52,13 +52,21 @@ class BitmapUtils {
         // Get device screen size information
         DisplayMetrics metrics = new DisplayMetrics();
         WindowManager manager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+        // to access the DisplayMetrics members, initialize an object like this:
+        // https://developer.android.com/reference/android/util/DisplayMetrics.html
         manager.getDefaultDisplay().getMetrics(metrics);
+
 
         int targetH = metrics.heightPixels;
         int targetW = metrics.widthPixels;
 
+
+        // reference: https://developer.android.com/topic/performance/graphics/load-bitmap.html#read-bitmap
         // Get the dimensions of the original bitmap
         BitmapFactory.Options bmOptions = new BitmapFactory.Options();
+        // so that ,  Setting the inJustDecodeBounds property to true while decoding avoids memory
+        // allocation, returning null for the bitmap object but setting outWidth, outHeight and
+        // outMimeType.
         bmOptions.inJustDecodeBounds = true;
         BitmapFactory.decodeFile(imagePath, bmOptions);
         int photoW = bmOptions.outWidth;
@@ -69,7 +77,37 @@ class BitmapUtils {
 
         // Decode the image file into a Bitmap sized to fill the View
         bmOptions.inJustDecodeBounds = false;
+
+        // reducing size of the picture
+        // https://developer.android.com/reference/android/graphics/BitmapFactory.Options.html#inSampleSize
         bmOptions.inSampleSize = scaleFactor;
+
+
+        // doing myself again to learn deeply
+        /*
+         DisplayMetrics tMetrics = new DisplayMetrics();
+         WindowManager tManager = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
+         tManager.getDefaultDisplay().getMetrics(tMetrics);
+
+         int systemHeight = tMetrics.heightPixels;
+         int systemWidth = tMetrics.widthPixels;
+
+         BitmapFactory.Options tOption = new BitmapFactory.Options();
+         tOption.inJustDecodeBounds = true;
+         BitmapFactory.decodeFile(imagePath,tOption);
+
+         int tPhotoH = tOption.outHeight;
+         int tPhotoW = tOption.outWidth;
+
+         tOption.inJustDecodeBounds = false;
+         int tScaleFactor = Math.min(tPhotoH/systemHeight,tPhotoW/systemWidth);
+         tOption.inSampleSize = tScaleFactor;
+         */
+
+
+
+
+
 
         return BitmapFactory.decodeFile(imagePath);
     }
