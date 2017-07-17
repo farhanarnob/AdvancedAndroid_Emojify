@@ -107,12 +107,12 @@ class Emojifier {
 
         float emojiScaleFactor = EMOJI_SCALE_FACTOR;
 
-        int emojiNewWidth = (int) (face.getWidth() * emojiScaleFactor);
-        int emojiNewHeight = (int) (emojiBitmap.getHeight() / emojiBitmap.getWidth()
-                * emojiNewWidth * emojiScaleFactor);
+        int newEmojiWidth = (int) (face.getWidth() * emojiScaleFactor);
+        int newEmojiHeight = (int) (emojiBitmap.getHeight() *
+                newEmojiWidth / emojiBitmap.getWidth() * emojiScaleFactor);
 
         // scale the emoji bitmap
-        emojiBitmap = Bitmap.createScaledBitmap(emojiBitmap, emojiNewWidth, emojiNewHeight, false);
+        emojiBitmap = Bitmap.createScaledBitmap(emojiBitmap, newEmojiWidth, newEmojiHeight, false);
 
         float emojoPositionX =
                 (face.getPosition().x + face.getWidth() / 2) - (emojiBitmap.getWidth() / 2);
