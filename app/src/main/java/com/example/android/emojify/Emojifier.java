@@ -12,6 +12,8 @@ import com.google.android.gms.vision.Frame;
 import com.google.android.gms.vision.face.Face;
 import com.google.android.gms.vision.face.FaceDetector;
 
+import timber.log.Timber;
+
 import static com.example.android.emojify.Emoji.CLOSED_EYE_SMILE;
 import static com.example.android.emojify.Emoji.LEFT_WINK;
 import static com.example.android.emojify.Emoji.LEFT_WINK_FROWN;
@@ -46,7 +48,7 @@ class Emojifier {
         // detect faces
         SparseArray<Face> faces = faceDetector.detect(frame);
 
-        Log.d(LOG_TAG, "Number of faces: " + faces.size());
+        Timber.d("Number of faces: " + faces.size());
         if (faces.size() <= 0) {
             Toast.makeText(context, R.string.no_faces_message, Toast.LENGTH_SHORT).show();
         } else {
